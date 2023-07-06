@@ -1,20 +1,25 @@
 import React from "react";
+import Container from "react-bootstrap/esm/Container";
+import { useOutletContext } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-
-  
 
 function UploadFile() {
+    const [title, setTitle] = useOutletContext();
+    setTitle("Upload File");
     return (
-        <div class="chunks">
-            <form action='' method='post' enctype="multipart/form-data">
-                <div>
-                    <label for='toEncryptFile'>Select a file to encrypt:</label>
-                    <input type='file' name='toEncryptFile' id='toEncryptFile' accept="application/sla" required=''/>                </div>
-                <div>
-                    <input type='submit' value='Encrypt' />
-                </div>
-            </form>
-        </div>
+        <Container>
+            <Form action='' method='post' enctype="multipart/form-data">
+                <Form.Group className="mb-3" controlId="toEncryptFile">
+                    <Form.Label>Select file to encrypt:</Form.Label>
+                    <Form.Control type="file"/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Encrypt
+                </Button>
+            </Form>
+        </Container>
     );
 }
 

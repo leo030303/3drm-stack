@@ -1,29 +1,33 @@
 import React from "react";
-
-
+import Container from "react-bootstrap/esm/Container";
+import { useOutletContext } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
   
 
 function ManageAccess() {
+    const [title, setTitle] = useOutletContext();
+    setTitle("Manage Access");
     return (
-        <div class="chunks" id="access_fields">
-            <form action='' method='post'>
-                <div>
-                    <label htmlFor='fileID'>Enter fileID:</label>:
-                    <input type='number' name='fileID' id='fileID' required=''/>
-                </div>
-                <div>
-                    <label htmlFor='userID'>Enter userID:</label>:
-                    <input type='number' name='userID' id='userID' required=''/>
-                </div>
-                <div>
-                    <label htmlFor='expiryDate'>Enter expiry date:</label>:
-                    <input type='date' name='expiryDate' id='expiryDate' required=''/>
-                </div>
-                <div>
-                    <input type='submit' value='Submit' />
-                </div>
-            </form>
-        </div>
+        <Container>
+            <Form action='' method='post'>
+                <Form.Group className="mb-3" controlId="fileID">
+                    <Form.Label>Enter fileID:</Form.Label>
+                    <Form.Control type='number' name='fileID' id='fileID' required=''/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="userID">
+                    <Form.Label>Enter userID:</Form.Label>
+                    <Form.Control type='number' name='userID' id='userID' required=''/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="expiryDate">
+                    <Form.Label>Enter expiry date:</Form.Label>
+                    <Form.Control type='date' name='expiryDate' id='expiryDate' required=''/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </Container>
     );
 }
 

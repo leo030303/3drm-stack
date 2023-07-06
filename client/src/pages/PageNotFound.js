@@ -1,10 +1,14 @@
 import React from "react";
+import Container from "react-bootstrap/esm/Container";
+import { useOutletContext } from 'react-router-dom';
 
 function PageNotFound() {
+    const [title, setTitle] = useOutletContext();
+    setTitle("404");
     return (
-        <div class="chunks">
+        <Container>
             Page Not Found
-        </div>
+        </Container>
     );
 }
 

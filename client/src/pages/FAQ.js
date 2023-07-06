@@ -1,11 +1,15 @@
 import React from "react";
+import { useOutletContext } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 
   
 
 function FAQ() {
+    const [title, setTitle] = useOutletContext();
+    setTitle("Help");
     return (
-        <div class="chunks">
+        <Container>
             FAQ
             <ul>
                 <li>
@@ -18,7 +22,8 @@ function FAQ() {
                     Item 3
                 </li>
             </ul>
-        </div>
+            </Container>
+            
     );
 }
 

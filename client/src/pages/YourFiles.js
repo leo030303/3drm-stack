@@ -1,13 +1,16 @@
 import React from "react";
-
+import Container from "react-bootstrap/esm/Container";
+import { useOutletContext } from 'react-router-dom';
 
   
 
 function YourFiles() {
+    const [title, setTitle] = useOutletContext();
+    setTitle("Your Files");
     return (
-        <div class="chunks">
+        <Container>
             Your Files Placeholder
-        </div>
+        </Container>
     );
 }
 

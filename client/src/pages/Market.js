@@ -1,11 +1,14 @@
 import React from "react";
-
+import Container from "react-bootstrap/esm/Container";
+import { useOutletContext } from 'react-router-dom';
 
 function Market() {
+    const [title, setTitle] = useOutletContext();
+    setTitle("Market");
     return (
-        <div class="chunks">
+        <Container>
             Market Placeholder
-        </div>
+        </Container>
     );
 }
 
