@@ -1,0 +1,14 @@
+extends layout
+
+block title
+  | Encrypt File
+
+block content
+  div(class="chunks" id="entryFields")
+    form(action='' method='post' enctype="multipart/form-data")
+      div
+        label(for='') Select a file to encrypt:
+        input#toEncryptFile(type='file' name='toEncryptFile' accept="application/sla" required='')
+      div
+        input(type='submit' value='Encrypt')
+

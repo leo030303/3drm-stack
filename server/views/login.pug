@@ -1,0 +1,21 @@
+extends layout
+
+block title
+  | Login
+
+block content
+  h2= message 
+  div(class="chunks" id="loginFields")
+    form(action='' method='post')
+      div
+        label(for='username') Enter username:
+        input(type='text' name='username' id='username'  required='')
+      div
+        label(for='password') Enter password:
+        input(type='password' name='password' id='password'  required='')
+      div
+        input(type='submit' value='login')
+    a(href='/createUser')
+      | Sign Up
+
+

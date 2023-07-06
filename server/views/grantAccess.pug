@@ -1,0 +1,21 @@
+extends layout
+
+block title
+  | Manage Access
+
+block content
+  div(class="chunks" id="access_fields")
+    form(action='' method='post')
+      div
+        label(for='fileID') Enter fileID:
+        input(type='number' name='fileID' id='fileID'  required='')
+      div
+        label(for='userID') Enter userID:
+        input(type='number' name='userID' id='userID'  required='')
+      div
+        label(for='expiryDate') Enter expiry date:
+        input(type='date' name='expiryDate' id='expiryDate'  required='')
+      div
+        input(type='submit' value='editAccess')
+
+
