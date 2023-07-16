@@ -17,7 +17,7 @@ function ViewAd() {
     }
     return (
         <Container>
-            <h1>{fileData.filename}</h1>
+            <h1>{fileData.fileName}</h1>
             <h3>€{fileData.filePrice}</h3>
             <p>{fileData.fileDescription}</p>
             <Carousel>
