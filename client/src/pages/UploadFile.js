@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Container from "react-bootstrap/esm/Container";
 import { useOutletContext } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -9,7 +9,9 @@ import Form from 'react-bootstrap/Form';
 
 function UploadFile({user}) {
     const [title, setTitle] = useOutletContext();
-    setTitle("Upload File");
+    useEffect(() => {
+        setTitle("Upload File");
+    }, [])
     const pictureInput = React.createRef();
     const stlInput = React.createRef();
     const handleSubmit = (event) => {

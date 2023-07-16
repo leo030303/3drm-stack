@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { useOutletContext, useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,9 @@ import Button from 'react-bootstrap/Button';
 
 function Buy({user}) {
     const [title, setTitle] = useOutletContext();
-    setTitle("Buy");
+    useEffect(() => {
+        setTitle("Buy");
+    }, [])
     const location = useLocation()
     const { FileID } = location.state
     function testPay(){ 

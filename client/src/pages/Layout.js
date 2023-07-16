@@ -7,9 +7,9 @@ import Navbar from 'react-bootstrap/Navbar';
 const Layout = () => {
     const [title, setTitle] = useState("Title");
     return (
-        <div class="d-flex flex-column min-vh-100">
-            <header class="jumbotron">
-                <div class="container text-center">
+        <div className="d-flex flex-column min-vh-100">
+            <header className="jumbotron">
+                <div className="container text-center">
                     <h1>{title}</h1>
                 </div>
             </header>
@@ -28,7 +28,7 @@ const Layout = () => {
                 </Container>
             </Navbar>
             <Outlet context={[title, setTitle]}/>
-            <footer class="container-fluid text-center mt-auto">
+            <footer className="container-fluid text-center mt-auto">
                 3DRM 2023 Leo Ring Contact: leoring03@gmail.com 
             </footer>
         </div>

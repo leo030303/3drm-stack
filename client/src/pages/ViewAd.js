@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate, useLocation} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
@@ -10,7 +10,9 @@ function ViewAd() {
     const [title, setTitle] = useOutletContext();
     const location = useLocation()
     const { fileData } = location.state
-    setTitle("temp");
+    useEffect(() => {
+        setTitle(fileData.fileName);
+    }, [])
     let navigate = useNavigate();
     function routeChange(){ 
         navigate("/buy", { state: { FileID: fileData.FileID} });

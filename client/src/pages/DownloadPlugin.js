@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -7,7 +7,9 @@ import Form from 'react-bootstrap/Form';
 
 function DownloadPlugin() {
     const [title, setTitle] = useOutletContext();
-    setTitle("Download Plugin");
+    useEffect(() => {
+        setTitle("Download Plugin");
+    }, [])
     return (
         <Container>
             <Form action='/api/plugin' method='post' >

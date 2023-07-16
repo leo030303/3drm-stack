@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Container from "react-bootstrap/esm/Container";
 import { useOutletContext } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,9 @@ import Form from 'react-bootstrap/Form';
 
 function ManageAccess({user}) {
     const [title, setTitle] = useOutletContext();
-    setTitle("Manage Access");
+    useEffect(() => {
+        setTitle("Manage Access");
+    }, [])
     return (
         <Container>
             Just for testing will remove

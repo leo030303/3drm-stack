@@ -165,9 +165,6 @@ router.post("/signup", async (req, res) => {
       res.status(201).json({
         message: "Signup was successful",
         user: {
-          firstName: profile?.given_name,
-          lastName: profile?.family_name,
-          picture: profile?.picture,
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, "mysecret", {
             expiresIn: "1d",
@@ -211,9 +208,6 @@ router.post("/login", async (req, res) => {
         res.status(201).json({
           message: "Login was successful",
           user: {
-            firstName: profile?.given_name,
-            lastName: profile?.family_name,
-            picture: profile?.picture,
             email: profile?.email,
             token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET, {
               expiresIn: process.env.TOKEN_EXPIRY_LENGTH,
@@ -230,6 +224,13 @@ router.post("/login", async (req, res) => {
 });
 
 
+router.get('/getUsername', authenticateToken, async function(req, res) {
+  const sqlQuery = `SELECT username FROM Users WHERE email="${req.user.email}";`;
+  connection.query(sqlQuery, (err, rows, fields) => {
+    if (err) throw err
+    res.send({username: rows[0].username});
+  })
+}); 
 
 router.post('/plugin', function(req, res) {
   const absolutePath = path.join(__dirname, '../public/others/3DRM1.0.0-sdk8.0.0.curapackage');
@@ -268,6 +269,17 @@ router.get('/yourPrivileges', authenticateToken, async function(req, res) {
   })
 });
 
+
+
+router.post('/changeUsername', authenticateToken, function(req, res) {
+  const sqlQuery = `UPDATE Users SET username = "${req.body.newName}" 
+                    WHERE email="${req.user.email}";`;
+  connection.query(sqlQuery, (err, rows, fields) => {
+    if (err) throw err
+    res.sendStatus(200);
+  })
+});
+
 router.post('/grantAccess', authenticateToken, function(req, res) {
   const numberOfDays = 3;
   const tempDate = new Date(Date.now() + numberOfDays * 1000 * 86400);
@@ -295,11 +307,11 @@ router.post('/uploadFile', authenticateToken, newAdFilesUpload, async function(r
     res.redirect('/');
   })
 });
- 
+
 
 router.post('/getEncrypted', authenticateToken, checkPrivilege, async function(req, res) {
   const sqlQuery = `SELECT fileRoute FROM Files WHERE FileID=${req.body.FileID};`;
-  connection.query(, (err, rows, fields) => {
+  connection.query(sqlQuery, (err, rows, fields) => {
     if (err) throw err
     const absolutePath = path.join(__dirname, '../'+rows[0].fileRoute);
     res.download(absolutePath);
