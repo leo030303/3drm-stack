@@ -10,8 +10,8 @@ function Contact() {
     setTitle("Contact");
     return (
         <Container>
-            <p>Author: Leo Ring
-            leoring03@gmail.com</p>
+            <p>Author: Leo Ring<br/>
+            Email: leoring03@gmail.com</p>
         </Container>
     );
 }

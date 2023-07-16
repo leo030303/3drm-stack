@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var session = require('express-session');
 const cors = require('cors');
-
+require("dotenv/config"); // configure reading from .env
 
 
 var indexRouter = require('./routes/index');
@@ -16,16 +16,20 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(cors())
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+}))
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(express.json({limit: '50mb', extended: true}));
+//app.use(express.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-app.use(express.urlencoded({ extended: false }));
+//app.use(express.urlencoded({ extended: false }));
 app.use(session({
   resave: false, // don't save session if unmodified
   saveUninitialized: false, // don't create session until something stored
@@ -47,6 +51,7 @@ app.use(function(req, res, next){
   if (msg) res.locals.message = 'p (class="msg success")' + msg + '</p>';
   next();
 });
+
 
 
 

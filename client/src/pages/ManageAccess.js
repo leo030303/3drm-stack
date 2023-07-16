@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
   
 
-function ManageAccess() {
+function ManageAccess({user}) {
     const [title, setTitle] = useOutletContext();
     setTitle("Manage Access");
     return (
         <Container>
-            <Form action='' method='post'>
+            Just for testing will remove
+            <Form action='/api/manageAccess' method='post'>
                 <Form.Group className="mb-3" controlId="fileID">
                     <Form.Label>Enter fileID:</Form.Label>
                     <Form.Control type='number' name='fileID' id='fileID' required=''/>

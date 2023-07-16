@@ -1,7 +1,7 @@
 import React from "react";
 import { useOutletContext } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-
+import Form from 'react-bootstrap/Form';
 
   
 
@@ -10,12 +10,12 @@ function DownloadPlugin() {
     setTitle("Download Plugin");
     return (
         <Container>
-           <form action='' method='post'>
-                <div>
-                    <label htmlFor='toDownloadPlugin'>Click to Download Plugin:</label>
-                    <input type='submit' name='toDownloadPlugin' id='toDownloadPlugin' value='Download'/>
-                </div>
-            </form> 
+            <Form action='/api/plugin' method='post' >
+                <Form.Group className="mb-3" controlId="downloadPluginForm">
+                    <Form.Label>Click to download the 3DRM plugin for Ultimaker Cura:</Form.Label>
+                    <Form.Control type="submit" name='downloadPlugin' id='downloadPlugin' value="Download" />
+                </Form.Group>
+            </Form>
         </Container>
         
     );
