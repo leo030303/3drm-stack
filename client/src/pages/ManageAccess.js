@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
   
 
 function ManageAccess({user}) {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     useEffect(() => {
         setTitle("Manage Access");
     }, [])

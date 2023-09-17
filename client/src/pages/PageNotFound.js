@@ -3,7 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import { useOutletContext } from 'react-router-dom';
 
 function PageNotFound() {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     useEffect(() => {
         setTitle("404");
     }, [])

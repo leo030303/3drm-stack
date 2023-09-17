@@ -3,12 +3,13 @@ import Container from "react-bootstrap/esm/Container";
 import { useOutletContext } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import postFetch from '../hooks/postFetch';
 
 
 
 
 function UploadFile({user}) {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     useEffect(() => {
         setTitle("Upload File");
     }, [])
@@ -16,9 +17,6 @@ function UploadFile({user}) {
     const stlInput = React.createRef();
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        var url = "/api/uploadFile";
-        var bearer = 'Bearer ' + user.token;
         var formData = new FormData()
         formData.append("listingName", event.target.elements.listingName.value)
         formData.append("listingDescription", event.target.elements.listingDescription.value)
@@ -26,15 +24,7 @@ function UploadFile({user}) {
         formData.append("email", user.email)
         formData.append('listingSTL',  stlInput.current.files[0])
         formData.append('listingImage',  pictureInput.current.files[0])
-        fetch(url, {
-        method: 'POST',
-        credentials: "include",
-        headers: {
-            'Authorization': bearer
-        },
-        body: formData,
-        redirect: 'follow',
-        })
+        postFetch("/api/uploadFile", formData, user.token)
         event.target.reset();
     }
     return (

@@ -3,23 +3,14 @@ import Container from "react-bootstrap/esm/Container";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
+import postFetch from "../hooks/postFetch";
 
 
 
 function ChangeUsername({user}) {
     const handleSubmit = (event) => {
         event.preventDefault();
-        var url = "/api/changeUsername";
-        var bearer = 'Bearer ' + user.token;
-        fetch(url, {
-            method: 'POST',
-            credentials: "include",
-            headers: {
-                'Authorization': bearer,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ newName: event.target.elements.newName.value }),
-        });
+        postFetch("/api/changeUsername", { newName: event.target.elements.newName.value }, user.token);
         event.target.reset();
     }
     return (

@@ -2,30 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useOutletContext, useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import postFetch from '../hooks/postFetch';
 
   
 
 function Buy({user}) {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     useEffect(() => {
         setTitle("Buy");
     }, [])
     const location = useLocation()
     const { FileID } = location.state
     function testPay(){ 
-        var url = "/api/grantAccess";
-        var bearer = 'Bearer ' + user.token;
-        const myJSON = {"email": user.email, "FileID":  FileID}
-        fetch(url, {
-        method: 'POST',
-        credentials: "include",
-        headers: {
-            'Authorization': bearer,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(myJSON),
-        redirect: 'follow',
-        })
+        postFetch("/api/grantAccess", {"email": user.email, "FileID":  FileID}, user.token)
     }
     return (
         <Container>

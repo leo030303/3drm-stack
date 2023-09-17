@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
   
 
 function ViewAd() {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     const location = useLocation()
     const { fileData } = location.state
     useEffect(() => {

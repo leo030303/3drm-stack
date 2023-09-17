@@ -9,11 +9,13 @@ const multer  = require('multer');
 const bcrypt = require('bcrypt');
 const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
+const temp = require('temp')
 
 /* Imports /\ */
 
 /* Constants (Express, Multer, mysql connection, saltRounds for encryption, google login) \/ */
 
+temp.track();
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -310,11 +312,28 @@ router.post('/uploadFile', authenticateToken, newAdFilesUpload, async function(r
 
 
 router.post('/getEncrypted', authenticateToken, checkPrivilege, async function(req, res) {
-  const sqlQuery = `SELECT fileRoute FROM Files WHERE FileID=${req.body.FileID};`;
+  const sqlQuery = `SELECT fileRoute, fileName FROM Files WHERE FileID=${req.body.FileID};`;
   connection.query(sqlQuery, (err, rows, fields) => {
     if (err) throw err
     const absolutePath = path.join(__dirname, '../'+rows[0].fileRoute);
-    res.download(absolutePath);
+    const non64array = fs.readFileSync(absolutePath);
+    const array = non64array.toString('base64');
+    var iv = crypto.randomBytes(16);
+    var cipher = crypto.createCipheriv('aes-256-cbc',key, iv);
+    var crypted = cipher.update(array, 'base64', 'base64');
+    crypted += cipher.final('base64');
+    temp.open({suffix: '.leo'}, function(err, info) {
+      if (!err) {
+        fs.write(info.fd, crypted, (err) => {
+          console.log(err);
+        });
+        fs.close(info.fd, function(err) {
+          if (err) throw err;
+          res.download(info.path, filename=rows[0].fileName+'.leo');
+        });
+      }
+    });
+    //fs.writeFileSync(absolutePath, crypted);
   })
 });
 
@@ -342,7 +361,7 @@ router.get('/encrypt', function(req, res, next) {
   res.render('encrypt');
 });
 
-
+*/
 router.post("/decrypt", function(req, res) {
 	var array = req.body.mySTL;
     var iv = crypto.randomBytes(16);
@@ -351,7 +370,7 @@ router.post("/decrypt", function(req, res) {
     dec += decipher.final('base64');
 	res.json({ result: dec });
 });
-
+/*
 
 router.post("/encrypt", async function(req, res) {
   const absolutePath = path.join(__dirname, '../'+req.file.path);

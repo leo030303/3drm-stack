@@ -11,7 +11,7 @@ import ChangeUsername from '../components/ChangeUsername';
 
 function Profile({user}) {
       const [username, setUsername] = useState("username");
-      const [title, setTitle] = useOutletContext();
+      const [, setTitle] = useOutletContext();
       
       if (!user){
           window.location.assign("/login")

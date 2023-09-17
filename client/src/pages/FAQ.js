@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
   
 
 function FAQ() {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     useEffect(() => {
         setTitle("Help");
     }, [])

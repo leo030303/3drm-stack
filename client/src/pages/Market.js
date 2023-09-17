@@ -5,7 +5,7 @@ import FileCardGrid from '../components/FileCardGrid';
 
 
 function Market() {
-    const [title, setTitle] = useOutletContext();
+    const [, setTitle] = useOutletContext();
     useEffect(() => {
         setTitle("Market");
     }, [])
